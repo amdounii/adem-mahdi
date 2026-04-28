@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        // ✅ ADMIN فقط : gestion des utilisateurs
+        
         registry.addInterceptor(new RoleInterceptor(Set.of("ADMIN")))
                 .addPathPatterns("/api/utilisateurs/**")
                 .excludePathPatterns("/api/utilisateurs/public/**");
