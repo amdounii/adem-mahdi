@@ -1,0 +1,77 @@
+<div class="page">
+  <div class="topbar">
+    <div>
+      <h2>Ajouter une voiture</h2>
+      <p class="subtitle">Publiez une nouvelle annonce</p>
+    </div>
+
+    <button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+  </div>
+
+  <div class="card">
+    <div class="state error" *ngIf="error">{{ error }}</div>
+    <div class="state success" *ngIf="success">{{ success }}</div>
+
+    <form (ngSubmit)="submit()"  #f="ngForm">
+      <div class="grid">
+        <div class="field">
+  <label>Marque *</label>
+  <input [(ngModel)]="marque" name="marque" placeholder="Ex: Peugeot" required />
+  <small class="hint error" *ngIf="submitted && !marque.trim()">La marque est obligatoire.</small>
+</div>
+
+<div class="field">
+  <label>Modèle *</label>
+  <input [(ngModel)]="modele" name="modele" placeholder="Ex: 208" required />
+  <small class="hint error" *ngIf="submitted && !modele.trim()">Le modèle est obligatoire.</small>
+</div>
+
+
+        <div class="field">
+          <label>Année</label>
+          <input type="number" [(ngModel)]="annee" name="annee" placeholder="Ex: 2021" />
+        </div>
+
+        <div class="field">
+          <label>Kilométrage</label>
+          <input type="number" [(ngModel)]="kilometrage" name="kilometrage" placeholder="Ex: 50000" />
+        </div>
+
+        <div class="field">
+  <label>Prix *</label>
+  <input type="number" [(ngModel)]="prixVendeur" name="prixVendeur" placeholder="Ex: 35000" required min="1" />
+  <small class="hint error" *ngIf="submitted && (!prixVendeur || prixVendeur <= 0)">
+    Veuillez saisir un prix valide (> 0).
+  </small>
+</div>
+
+
+        <div class="field">
+          <label>Statut</label>
+          <select [(ngModel)]="statut" name="statut">
+            <option value="DISPONIBLE">DISPONIBLE</option>
+            <option value="VENDUE">VENDUE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Description</label>
+        <textarea [(ngModel)]="description" name="description" rows="4" placeholder="Description de la voiture..."></textarea>
+      </div>
+
+      <div class="field full">
+        <label>Images (URLs séparées par virgule)</label>
+        <input [(ngModel)]="imagesText" name="imagesText" placeholder="https://...jpg, https://...png" />
+        <small>Ex: url1.jpg, url2.png (max 10)</small>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+        <button class="btn primary" type="submit" [disabled]="f.invalid">
+          {{ loading ? 'Ajout...' : 'Ajouter' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

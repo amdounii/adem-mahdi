@@ -1,0 +1,24 @@
+<div class="admin-page">
+  <h1 class="title">Dashboard Admin</h1>
+  <p class="subtitle">Gestion générale de l’application</p>
+
+  <div class="cards">
+    <div class="card" (click)="goToVoitures()">
+      <div class="icon">🚗</div>
+      <h2>Gestion des voitures</h2>
+      <p>Ajouter, modifier et supprimer les voitures</p>
+    </div>
+
+    <div class="card" (click)="goToUtilisateurs()">
+      <div class="icon">👥</div>
+      <h2>Gestion des utilisateurs</h2>
+      <p>Voir et gérer les comptes utilisateurs</p>
+    </div>
+  </div>
+
+  <div class="logout-zone">
+    <button class="btn danger" type="button" (click)="logout()">
+      Déconnexion
+    </button>
+  </div>
+</div>

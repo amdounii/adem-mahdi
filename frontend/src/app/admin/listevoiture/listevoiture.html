@@ -1,0 +1,75 @@
+<div class="page">
+  <div class="top">
+    <div>
+      <h1>Liste des voitures</h1>
+      <p>Gestion et consultation des voitures enregistrées</p>
+    </div>
+
+    <button class="btn" (click)="loadAll()">Rafraîchir</button>
+  </div>
+
+  <!-- Barre de recherche (optionnelle) -->
+  <div class="search">
+    <div class="field">
+      <label>Marque</label>
+      <input [(ngModel)]="marque" name="marque" placeholder="ex: Audi" />
+    </div>
+    <div class="field">
+      <label>Modèle</label>
+      <input [(ngModel)]="modele" name="modele" placeholder="ex: A3" />
+    </div>
+
+    <button class="btn primary" (click)="search()">Rechercher</button>
+    <button class="btn ghost" (click)="clearSearch()">Effacer</button>
+  </div>
+
+  <!-- Loading -->
+  <div class="state" *ngIf="loading">
+    Chargement...
+  </div>
+
+  <!-- Error -->
+  <div class="state error" *ngIf="!loading && error">
+    {{ error }}
+  </div>
+
+  <!-- Empty -->
+  <div class="state empty" *ngIf="!loading && !error && voitures.length === 0">
+    Aucune voiture trouvée pour le moment.
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap" *ngIf="!loading && !error && voitures.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Marque</th>
+          <th>Modèle</th>
+          <th>Année</th>
+          <th>Kilométrage</th>
+          <th>Prix</th>
+          <th>Statut</th>
+          <th>Vendeur</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of voitures">
+          <td>{{ v.id }}</td>
+          <td>{{ v.marque }}</td>
+          <td>{{ v.modele }}</td>
+          <td>{{ v.annee ?? '-' }}</td>
+          <td>{{ v.kilometrage ?? '-' }}</td>
+          <td>{{ v.prixVendeur ?? '-' }}</td>
+          <td><span class="badge">{{ v.statut ?? '-' }}</span></td>
+          <td>{{ v.vendeurId ?? '-' }}</td>
+          <td>
+            <button class="btn" (click)="viewDetails(v.id)">Voir</button>
+            <button class="btn danger" (click)="supprimer(v.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

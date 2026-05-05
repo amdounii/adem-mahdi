@@ -1,0 +1,87 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <div class="logo">🚗</div>
+      <h1>Inscription</h1>
+      <p>Créer un nouveau compte</p>
+    </div>
+
+    <div class="state error" *ngIf="error">
+      {{ error }}
+    </div>
+
+    <div class="state success" *ngIf="success">
+      {{ success }}
+    </div>
+
+    <form class="auth-form" (ngSubmit)="submit()" #f="ngForm">
+
+      <div class="field">
+        <label>Nom complet</label>
+        <input
+          type="text"
+          [(ngModel)]="nom"
+          name="nom"
+          placeholder="Ex: Ahmed Ben Ali"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="ex: nom@email.com"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Téléphone</label>
+        <input
+          type="tel"
+          [(ngModel)]="telephone"
+          name="telephone"
+          placeholder="+216 99 999 999"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+        <input
+          type="password"
+          [(ngModel)]="motDePasse"
+          name="motDePasse"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Rôle</label>
+        <select [(ngModel)]="role" name="role">
+          <option value="ACHETEUR">Acheteur</option>
+          <option value="VENDEUR">Vendeur</option>
+        </select>
+      </div>
+
+      <button class="btn primary" type="submit" [disabled]='f.invalid || loading'>
+        {{ loading ? 'Création...' : 'Créer un compte' }}
+      </button>
+
+      <button class="btn ghost" type="button" (click)="goLogin()">
+        Déjà un compte ? Se connecter
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      © Car Management • Inscription sécurisée
+    </div>
+
+  </div>
+</div>

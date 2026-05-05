@@ -1,0 +1,87 @@
+<div class="page">
+
+  <div class="topbar">
+    <div>
+      <h2>Liste des voitures</h2>
+      <p class="subtitle">Filtrez et consultez les voitures disponibles</p>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn ghost" type="button" (click)="goMonCompte()">Mon compte</button>
+      <button class="btn primary" type="button" (click)="goPublier()">+ Ajouter voiture</button>
+      <button class="btn" type="button" (click)="fetch()">Rafraîchir</button>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="filters">
+    <div class="row">
+      <input type="text" placeholder="Marque (ex: Peugeot)" [(ngModel)]="marque" (input)="applyFilters()" />
+      <input type="text" placeholder="Modèle (ex: 308)" [(ngModel)]="modele" (input)="applyFilters()" />
+
+      <select [(ngModel)]="statut" (change)="applyFilters()">
+        <option value="" disabled selected>Statut: Tous</option>
+        <option value="DISPONIBLE">DISPONIBLE</option>
+        <option value="VENDUE">VENDUE</option>
+        <option value="RESERVEE">RESERVEE</option>
+      </select>
+
+      <button type="button" class="btn danger" (click)="resetFilters()">Réinitialiser</button>
+    </div>
+
+    <div class="row">
+      <input type="number" placeholder="Prix min" [(ngModel)]="prixMin" (input)="applyFilters()" />
+      <input type="number" placeholder="Prix max" [(ngModel)]="prixMax" (input)="applyFilters()" />
+      <input type="number" placeholder="Km min" [(ngModel)]="kmMin" (input)="applyFilters()" />
+      <input type="number" placeholder="Km max" [(ngModel)]="kmMax" (input)="applyFilters()" />
+      <input type="number" placeholder="Année min" [(ngModel)]="anneeMin" (input)="applyFilters()" />
+      <input type="number" placeholder="Année max" [(ngModel)]="anneeMax" (input)="applyFilters()" />
+    </div>
+
+    <div class="info">
+      Résultats : <b>{{ filtered.length }}</b> / {{ voitures.length }}
+    </div>
+  </div>
+
+  <!-- Etat -->
+  <div class="state" *ngIf="loading">Chargement...</div>
+  <div class="state error" *ngIf="error">{{ error }}</div>
+
+  <!-- Liste -->
+  <div class="grid" *ngIf="!loading && !error">
+    <div class="card" *ngFor="let v of filtered">
+      <div class="img" *ngIf="firstImage(v); else noImg">
+        <img [src]="firstImage(v)!" alt="voiture" />
+      </div>
+      <ng-template #noImg>
+        <div class="img placeholder">No image</div>
+      </ng-template>
+
+      <div class="title">
+        <b>{{ v.marque }}</b> {{ v.modele }}
+      </div>
+
+      <div class="meta">
+        <div>Année: <b>{{ show(v.annee) }}</b></div>
+        <div>Kilométrage: <b>{{ show(v.kilometrage) }}</b> km</div>
+        <div>Prix: <b>{{ show(v.prixVendeur) }}</b></div>
+        <div>Statut: <b>{{ show(v.statut) }}</b></div>
+      </div>
+
+      <div class="desc" *ngIf="v.description">
+        {{ v.description }}
+      </div>
+      <div class="actions">
+  <button class="btn ghost" type="button" (click)="goCommentaires(v.id)">
+    Commentaires
+  </button>
+  <button class="btn ghost" type="button" (click)="godetaille(v.id)">
+    Détails
+  </button>
+</div>
+
+
+    </div>
+  </div>
+
+</div>

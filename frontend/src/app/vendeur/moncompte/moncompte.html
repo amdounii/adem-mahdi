@@ -1,0 +1,123 @@
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div>
+      <h2>Mon compte</h2>
+      <p class="subtitle">Vos informations + vos voitures publiées</p>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn primary" type="button" routerLink="/vendeur/publier">
+        + Ajouter voiture
+      </button>
+
+      <button class="btn ghost" type="button" (click)="load()">
+        Rafraîchir
+      </button>
+      <button class="btn ghost" type="button" routerLink="/vendeur">
+        acceuil
+      </button>
+      <button class="btn danger" type="button" (click)="logout()">
+        Déconnexion
+      </button>
+    </div>
+  </div>
+
+  <!-- STATES -->
+  <div class="state loading" *ngIf="loading">
+    Chargement…
+  </div>
+
+  <div class="state error" *ngIf="!loading && error">
+    {{ error }}
+  </div>
+
+  <!-- CONTENT -->
+  <div *ngIf="!loading && !error">
+
+    <!-- PROFIL -->
+    <div class="profile-card" *ngIf="user; else noUser">
+      <div class="avatar">
+        {{ (user.nom || 'V').slice(0,1).toUpperCase() }}
+      </div>
+
+      <div class="profile-info">
+        <div class="name">{{ user.nom || '—' }}</div>
+        <div class="muted">{{ user.email || '—' }}</div>
+
+        <div class="chips">
+          <span class="chip">{{ user.role || 'VENDEUR' }}</span>
+          <span class="chip">{{ user.telephone || 'Téléphone —' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noUser>
+      <div class="state empty">Impossible de charger vos informations.</div>
+    </ng-template>
+
+    <!-- SECTION VOITURES -->
+    <div class="section">
+      <div class="section-head">
+        <h3>Mes voitures</h3>
+        <div class="count">{{ voitures.length }} annonce(s)</div>
+      </div>
+
+      <!-- EMPTY -->
+      <div class="state empty" *ngIf="voitures.length === 0">
+        Vous n’avez aucune voiture publiée pour le moment.
+      </div>
+
+      <!-- GRID -->
+      <div class="grid" *ngIf="voitures.length > 0">
+
+        <div class="card" *ngFor="let v of voitures">
+
+          <!-- IMAGE -->
+          <div class="img" *ngIf="firstImage(v); else noImg">
+            <img [src]="firstImage(v)!" alt="voiture">
+          </div>
+          <ng-template #noImg>
+            <div class="img placeholder">No image</div>
+          </ng-template>
+
+          <!-- TITLE -->
+          <div class="title">
+            <b>{{ v.marque }}</b> {{ v.modele }}
+          </div>
+
+          <!-- META -->
+          <div class="meta">
+            <div>Année: <b>{{ show(v.annee) }}</b></div>
+            <div>Kms: <b>{{ show(v.kilometrage) }}</b></div>
+            <div>Prix: <b>{{ show(v.prixVendeur) }}</b></div>
+            <div>Statut: <b>{{ show(v.statut) }}</b></div>
+          </div>
+
+          <!-- DESC -->
+          <div class="desc" *ngIf="v.description">
+            {{ v.description }}
+          </div>
+
+          <!-- ACTIONS -->
+          <div class="actions">
+            <button class="btn small ghost"
+                    [routerLink]="['/vendeur/edit', v.id]">
+              Modifier
+            </button>
+
+            <button class="btn small danger"
+                    type="button"
+                    (click)="deleteCar(v.id)">
+              Supprimer
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,341 @@
+/* =========================
+   PAGE
+========================= */
+.page {
+  min-height: 100vh;
+  padding: 28px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #e5e7eb;
+
+  background:
+    radial-gradient(800px 400px at 10% 10%, rgba(59,130,246,.18), transparent 60%),
+    radial-gradient(700px 400px at 90% 20%, rgba(34,197,94,.14), transparent 60%),
+    linear-gradient(135deg, #0b1220, #050814 60%, #04060f);
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: .3px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+.filters {
+  max-width: 1200px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  margin-bottom: 16px;
+}
+
+.filters .row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filters input,
+.filters select {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #f9fafb;
+  outline: none;
+  transition: all .15s ease;
+}
+
+.filters input::placeholder {
+  color: #9ca3af;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #3b82f6;
+  background: rgba(255,255,255,.1);
+  box-shadow: 0 0 0 4px rgba(59,130,246,.2);
+}
+
+.filters button {
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #f9fafb;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.filters button:hover {
+  background: rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+
+.filters .info {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+/* =========================
+   STATES
+========================= */
+.error {
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(239,68,68,.15);
+  border: 1px solid rgba(239,68,68,.45);
+  color: #fee2e2;
+}
+
+/* =========================
+   GRID
+========================= */
+.grid {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 16px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 25px 60px rgba(0,0,0,.55);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 35px 80px rgba(0,0,0,.65);
+}
+
+/* Image */
+.card .img {
+  height: 170px;
+  background: rgba(255,255,255,.08);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.card .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card .img.placeholder {
+  font-size: 13px;
+  font-weight: 700;
+  color: #9ca3af;
+}
+
+/* Title */
+.card .title {
+  padding: 12px 14px 6px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+/* Meta */
+.card .meta {
+  padding: 6px 14px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+.card .meta b {
+  color: #f9fafb;
+}
+
+/* Description */
+.card .desc {
+  padding: 0 14px 14px;
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.45;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+  .filters .row {
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 18px; }
+  .filters .row { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
+  .card .meta { grid-template-columns: 1fr; }
+}
+/* Select (champ fermé) */
+.filters select{
+  background: rgba(255,255,255,.07);
+  color: #f9fafb;
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+/* Dropdown (options) - marche sur plusieurs navigateurs */
+.filters select option{
+  background: #0b1220;   /* fond dark */
+  color: #f9fafb;        /* texte clair */
+}
+
+/* Option placeholder (Statut: Tous) si tu la rends disabled */
+.filters select option[disabled]{
+  color: rgba(148,163,184,.75);
+}
+
+/* Quand une option est sélectionnée (certains navigateurs) */
+.filters select option:checked{
+  background: #2563eb;
+  color: #ffffff;
+}
+.topbar{
+  max-width: 1200px;
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.subtitle{
+  margin: 6px 0 0 0;
+  font-size: 13px;
+  color: rgba(148,163,184,.95);
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.btn{
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #f9fafb;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.btn:hover{
+  background: rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+
+.btn.ghost{
+  background: transparent;
+}
+
+.btn.danger{
+  border-color: rgba(239,68,68,.45);
+  background: rgba(239,68,68,.12);
+}
+
+.btn.danger:hover{
+  background: rgba(239,68,68,.18);
+}
+
+.state{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.state.error{
+  background: rgba(239,68,68,.14);
+  border-color: rgba(239,68,68,.45);
+}
+.btn.primary{
+  background: rgba(59,130,246,.18);
+  border-color: rgba(59,130,246,.45);
+}
+.btn.primary:hover{
+  background: rgba(59,130,246,.28);
+}
+.actions{
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn.fav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  color: #f9fafb;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.btn.fav:hover{
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.btn.fav .heart{
+  font-size: 18px;
+  line-height: 1;
+}
+
+.btn.fav.active{
+  border-color: rgba(239,68,68,.55);
+  background: rgba(239,68,68,.14);
+}
+
+.btn.fav.active .heart{
+  filter: drop-shadow(0 6px 14px rgba(239,68,68,.35));
+}
+
+
+
+
+

@@ -1,0 +1,53 @@
+<div class="page">
+  <div class="topbar">
+    <div>
+      <h2>Détails voiture</h2>
+      <p class="subtitle">Informations voiture + vendeur</p>
+    </div>
+
+    <button class="btn ghost" type="button" (click)="back()">Retour</button>
+  </div>
+
+  <div class="state" *ngIf="loading">Chargement...</div>
+  <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+
+  <div class="content" *ngIf="!loading && !error && voiture">
+
+    <!-- Image -->
+    <div class="hero">
+      <img *ngIf="firstImage(voiture)" [src]="firstImage(voiture)" alt="voiture">
+      <div *ngIf="!firstImage(voiture)" class="noimg">Pas d'image</div>
+    </div>
+
+    <!-- Infos voiture -->
+    <div class="card">
+      <h3>{{ voiture.marque }} — {{ voiture.modele }}</h3>
+
+      <div class="grid">
+        <div><span>Année</span><b>{{ voiture.annee || '—' }}</b></div>
+        <div><span>Kilométrage</span><b>{{ voiture.kilometrage || '—' }} km</b></div>
+        <div><span>Prix</span><b>{{ voiture.prixVendeur || '—' }}</b></div>
+        <div><span>Statut</span><b>{{ voiture.statut || '—' }}</b></div>
+      </div>
+
+      <p class="desc" *ngIf="voiture.description">{{ voiture.description }}</p>
+    </div>
+
+    <!-- Infos vendeur -->
+    <div class="card">
+      <h3>Vendeur</h3>
+
+      <div class="vendeur" *ngIf="vendeur; else noVendeur">
+        <div><span>Nom</span><b>{{ vendeur.nom || '—' }}</b></div>
+        <div><span>Email</span><b>{{ vendeur.email || '—' }}</b></div>
+        <div><span>Téléphone</span><b>{{ vendeur.telephone || '—' }}</b></div>
+        <div><span>Role</span><b>{{ vendeur.role || '—' }}</b></div>
+      </div>
+
+      <ng-template #noVendeur>
+        <div class="muted">Aucune info vendeur trouvée.</div>
+      </ng-template>
+    </div>
+
+  </div>
+</div>

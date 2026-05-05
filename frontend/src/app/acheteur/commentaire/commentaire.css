@@ -1,0 +1,220 @@
+:host {
+  display: block;
+}
+
+/* Page plein écran, sans cadre bizarre */
+.page {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 28px 24px;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(59,130,246,.18), transparent 55%),
+              radial-gradient(900px 600px at 90% 10%, rgba(168,85,247,.16), transparent 60%),
+              #0b1220;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Conteneur large mais pas collé aux bords */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: .2px;
+}
+
+.header .sub {
+  margin: 6px 0 0;
+  color: #a9b4c6;
+  font-size: 14px;
+}
+
+/* Boutons */
+.btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: #e5e7eb;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .08s ease, background .2s ease, border-color .2s ease;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.20);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, rgba(37,99,235,.95), rgba(59,130,246,.85));
+  border-color: rgba(59,130,246,.35);
+}
+
+.btn.primary:hover {
+  background: linear-gradient(135deg, rgba(37,99,235,1), rgba(59,130,246,.95));
+}
+
+.btn.ghost {
+  background: transparent;
+}
+
+/* Cards */
+.card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+
+/* Form */
+.form-title {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+label {
+  color: #c9d4e6;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+select, textarea, input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(15,23,42,.55);
+  color: #e5e7eb;
+  padding: 10px 12px;
+  outline: none;
+}
+
+select:focus, textarea:focus, input:focus {
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 0 0 4px rgba(59,130,246,.18);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Liste des avis */
+.section {
+  margin-top: 16px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0 10px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+  color: #dbe5f7;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Item avis */
+.review {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 10px;
+}
+
+.review .note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: #e5e7eb;
+}
+
+.review .text {
+  color: #d6def0;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+/* états */
+.state {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color: #dbe5f7;
+}
+
+.state.error {
+  border-color: rgba(239,68,68,.35);
+  background: rgba(239,68,68,.10);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .page { padding: 18px 14px; }
+  .header { flex-direction: column; align-items: stretch; }
+  .form-grid { grid-template-columns: 1fr; }
+  .review { grid-template-columns: 1fr; }
+}

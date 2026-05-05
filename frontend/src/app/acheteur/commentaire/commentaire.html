@@ -1,0 +1,56 @@
+<div class="page">
+
+  <div class="topbar">
+    <div>
+      <h2>Commentaires</h2>
+      <p class="subtitle">Voiture #{{ voitureId }}</p>
+    </div>
+
+    <button class="btn ghost" type="button" (click)="load()">Rafraîchir</button>
+  </div>
+
+  <div class="state loading" *ngIf="loading">Chargement…</div>
+  <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error">
+
+    <div class="form-card">
+      <h3>Ajouter un avis</h3>
+
+      <div class="row">
+        <label>Note</label>
+        <select [(ngModel)]="note">
+          <option [ngValue]="1">1</option>
+          <option [ngValue]="2">2</option>
+          <option [ngValue]="3">3</option>
+          <option [ngValue]="4">4</option>
+          <option [ngValue]="5">5</option>
+        </select>
+      </div>
+
+      <textarea rows="4" [(ngModel)]="commentaire" placeholder="Écrivez votre commentaire..."></textarea>
+
+      <div class="actions">
+        <button class="btn primary" type="button" (click)="submit()" [disabled]="sending">
+          {{ sending ? 'Envoi...' : 'Publier' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="list" *ngIf="avis.length > 0; else empty">
+      <div class="item" *ngFor="let a of avis">
+        <div class="head">
+          <div class="stars">⭐ {{ a.note ?? '—' }}/5</div>
+          <div class="date">{{ a.dateCreation || '' }}</div>
+        </div>
+        <div class="text">{{ a.commentaire || '—' }}</div>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="state empty">Aucun commentaire pour cette voiture.</div>
+    </ng-template>
+
+  </div>
+
+</div>

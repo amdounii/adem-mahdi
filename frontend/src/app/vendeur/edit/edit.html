@@ -1,0 +1,91 @@
+<div class="page">
+
+  <div class="topbar">
+    <div>
+      <h2>Modifier une voiture</h2>
+      <p class="subtitle">Mettre à jour les informations de l’annonce</p>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+    </div>
+  </div>
+
+  <!-- STATES -->
+  <div class="state loading" *ngIf="loading">Chargement…</div>
+
+  <div class="state error" *ngIf="!loading && error">
+    <strong>Erreur :</strong> {{ error }}
+  </div>
+
+  <div class="card" *ngIf="!loading && !error">
+
+    <div class="state success" *ngIf="success">{{ success }}</div>
+
+    <form (ngSubmit)="save()" #f="ngForm">
+      <div class="grid">
+        <div class="field">
+          <label>Marque *</label>
+          <input [(ngModel)]="marque" name="marque" required />
+          <small class="hint error" *ngIf="submitted && !marque.trim()">La marque est obligatoire.</small>
+        </div>
+
+        <div class="field">
+          <label>Modèle *</label>
+          <input [(ngModel)]="modele" name="modele" required />
+          <small class="hint error" *ngIf="submitted && !modele.trim()">Le modèle est obligatoire.</small>
+        </div>
+
+        <div class="field">
+          <label>Année</label>
+          <input type="number" [(ngModel)]="annee" name="annee" min="1900" />
+        </div>
+
+        <div class="field">
+          <label>Kilométrage</label>
+          <input type="number" [(ngModel)]="kilometrage" name="kilometrage" min="0" />
+        </div>
+
+        <div class="field">
+          <label>Prix vendeur (DT) *</label>
+          <input type="number" [(ngModel)]="prixVendeur" name="prixVendeur" required min="1" />
+          <small class="hint">⚠️ Le système refuse si le prix est trop élevé vs estimation.</small>
+          <small class="hint error" *ngIf="submitted && (!prixVendeur || prixVendeur <= 0)">
+            Veuillez saisir un prix valide (> 0).
+          </small>
+        </div>
+
+        <div class="field">
+          <label>Statut</label>
+          <select [(ngModel)]="statut" name="statut">
+            <option value="DISPONIBLE">DISPONIBLE</option>
+            <option value="VENDUE">VENDUE</option>
+            <option value="RESERVEE">RESERVEE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Description</label>
+        <textarea rows="4" [(ngModel)]="description" name="description"></textarea>
+      </div>
+
+      <div class="field full">
+        <label>Images (URLs séparées par virgule)</label>
+        <input [(ngModel)]="imagesText" name="imagesText" placeholder="url1.jpg, url2.png" />
+        <small class="hint">Max 10 images.</small>
+        <small class="hint error" *ngIf="submitted && imagesCount > 10">
+          Maximum 10 images autorisées (actuel: {{ imagesCount }}).
+        </small>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+
+        <button class="btn primary" type="submit" [disabled]="f.invalid">
+          {{ saving ? 'Sauvegarde...' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

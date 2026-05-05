@@ -1,0 +1,84 @@
+<div class="page">
+
+  <div class="topbar">
+    <div>
+      <h2>Mon profil</h2>
+      <p class="subtitle">Informations personnelles & favoris</p>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn ghost" type="button" routerLink="/acheteur">Accueil</button>
+    </div>
+    <button class="btn danger" type="button" (click)="logout()">
+        Déconnexion
+      </button>
+  </div>
+
+  <!-- Profil -->
+  <div class="state error" *ngIf="error">{{ error }}</div>
+
+  <div class="profile-card" *ngIf="!loading && user">
+    <div class="avatar">{{ (user.nom || 'U').slice(0,1).toUpperCase() }}</div>
+
+    <div class="info">
+      <div class="name">{{ user.nom }}</div>
+      <div class="row">
+        <span class="k">Email</span>
+        <span class="v">{{ user.email }}</span>
+      </div>
+      <div class="row">
+        <span class="k">Téléphone</span>
+        <span class="v">{{ show(user.telephone) }}</span>
+      </div>
+      <div class="row">
+        <span class="k">Rôle</span>
+        <span class="badge">{{ user.role }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favoris -->
+  <div class="section">
+    <div class="section-head">
+      <h3>Mes favoris</h3>
+      <span class="chip" *ngIf="!favorisLoading">{{ favorisVoitures.length }} voiture(s)</span>
+    </div>
+
+    <div class="state loading" *ngIf="favorisLoading">Chargement des favoris…</div>
+    <div class="state error" *ngIf="!favorisLoading && favorisError">{{ favorisError }}</div>
+
+    <div class="empty" *ngIf="!favorisLoading && !favorisError && favorisVoitures.length === 0">
+      Aucune voiture en favoris pour le moment.
+    </div>
+
+    <div class="grid" *ngIf="!favorisLoading && !favorisError && favorisVoitures.length > 0">
+      <div class="card" *ngFor="let v of favorisVoitures">
+        <div class="img" *ngIf="firstImage(v); else noImg">
+          <img [src]="firstImage(v)!" alt="voiture" />
+        </div>
+        <ng-template #noImg>
+          <div class="img placeholder">No image</div>
+        </ng-template>
+
+        <div class="title">
+          <b>{{ v.marque }}</b> {{ v.modele }}
+        </div>
+
+        <div class="meta">
+          <div>Année: <b>{{ show(v.annee) }}</b></div>
+          <div>Kilométrage: <b>{{ show(v.kilometrage) }}</b> km</div>
+          <div>Prix: <b>{{ show(v.prixVendeur) }}</b></div>
+          <div>Statut: <b>{{ show(v.statut) }}</b></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn ghost" type="button" (click)="goDetails(v.id)">Détails</button>
+          <button class="btn ghost" type="button" (click)="goCommentaires(v.id)">Commentaires</button>
+          <button class="btn danger" type="button" (click)="removeFavori(v.id)">Retirer ❤</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="page">
+	<div class="top">
+		<h1>Détails du véhicule</h1>
+	</div>
+
+	<div class="state" *ngIf="loading">Chargement...</div>
+	<div class="state error" *ngIf="!loading && error">{{ error }}</div>
+
+	<div *ngIf="!loading && !error && voiture">
+		<table class="detail-table">
+			<tr><th>ID</th><td>{{ voiture.id }}</td></tr>
+			<tr><th>Marque</th><td>{{ voiture.marque }}</td></tr>
+			<tr><th>Modèle</th><td>{{ voiture.modele }}</td></tr>
+			<tr *ngIf="voiture.images && voiture.images.length">
+				<th>Images</th>
+				<td>
+					<div class="images-grid">
+						<img *ngFor="let img of voiture.images" [src]="img" alt="voiture image" class="thumb"/>
+					</div>
+				</td>
+			</tr>
+			<tr><th>Année</th><td>{{ voiture.annee ?? '-' }}</td></tr>
+			<tr><th>Kilométrage</th><td>{{ voiture.kilometrage ?? '-' }}</td></tr>
+			<tr><th>Prix</th><td>{{ voiture.prixVendeur ?? '-' }}</td></tr>
+			<tr><th>Statut</th><td>{{ voiture.statut ?? '-' }}</td></tr>
+			<tr><th>Vendeur</th><td>{{ voiture.vendeurId ?? '-' }}</td></tr>
+			<tr><th>Description</th><td>{{ voiture.description ?? '-' }}</td></tr>
+		</table>
+	</div>
+</div>

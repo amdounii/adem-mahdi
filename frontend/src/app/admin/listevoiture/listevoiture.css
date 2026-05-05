@@ -1,0 +1,267 @@
+/* ===== Page layout ===== */
+.page {
+  min-height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.92);
+
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(59,130,246,0.18), transparent 55%),
+    radial-gradient(800px 500px at 90% 20%, rgba(99,102,241,0.14), transparent 58%),
+    linear-gradient(135deg, #0b1220 0%, #050814 60%, #04060f 100%);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ===== Header ===== */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.top p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+/* ===== Search bar ===== */
+.search {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  gap: 12px;
+  align-items: end;
+
+  max-width: 1100px;
+  padding: 14px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  margin-bottom: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.field input {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 14px;
+  outline: none;
+
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(15, 23, 42, 0.60);
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.field input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.field input:focus {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  cursor: pointer;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+
+  font-weight: 750;
+  letter-spacing: 0.2px;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+}
+
+.btn.primary {
+  border: none;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.35);
+}
+
+.btn.primary:hover {
+  filter: brightness(1.04);
+}
+
+.btn.ghost {
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn.danger {
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.10);
+  box-shadow: 0 14px 32px rgba(239, 68, 68, 0.10);
+}
+
+.btn.danger:hover {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+/* ===== States: loading / error / empty ===== */
+.state {
+  max-width: 1100px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  margin-top: 14px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.state.error {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.40);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.state.empty {
+  color: rgba(226, 232, 240, 0.85);
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  margin-top: 16px;
+  max-width: 1200px;
+  overflow: auto;
+
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow: 0 22px 60px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 980px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  text-align: left;
+  padding: 14px 14px;
+  font-size: 12px;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+
+  color: rgba(226, 232, 240, 0.70);
+  background: rgba(2, 6, 23, 0.75);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+tbody td {
+  padding: 14px 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.90);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+tbody tr {
+  transition: background 0.12s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===== Badge ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ===== Actions column buttons spacing ===== */
+td:last-child {
+  white-space: nowrap;
+}
+
+td:last-child .btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  margin-right: 8px;
+  box-shadow: none;
+}
+
+td:last-child .btn:hover {
+  box-shadow: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 920px) {
+  .page {
+    padding: 20px;
+  }
+
+  .search {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

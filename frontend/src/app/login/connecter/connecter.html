@@ -1,0 +1,44 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="logo">🚗</div>
+      <h1>Connexion</h1>
+      <p>Choisis ton rôle et connecte-toi.</p>
+    </div>
+
+    <form class="auth-form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Rôle</label>
+        <select [(ngModel)]="role" name="role" required>
+          <option value="ADMIN">ADMIN</option>
+          <option value="VENDEUR">VENDEUR</option>
+          <option value="ACHETEUR">ACHETEUR</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="ex: nom@email.com" required />
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+        <input type="password" [(ngModel)]="motDePasse" name="motDePasse" placeholder="••••••••" required />
+      </div>
+
+      <button class="btn" type="submit">Se connecter</button>
+
+      <button class="btn" type="button"  (click)="goisncription()">S'inscrire</button>
+
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <div class="auth-footer">
+        <span>© Car Management</span>
+        <span class="dot">•</span>
+        <span>Sécurisé par session</span>
+      </div>
+    </form>
+  </div>
+</div>

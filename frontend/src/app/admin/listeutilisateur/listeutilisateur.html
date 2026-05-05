@@ -1,0 +1,46 @@
+<div class="page">
+	<div class="top">
+		<div>
+			<h1>Liste des utilisateurs</h1>
+			<p>Gestion et consultation des comptes utilisateurs</p>
+		</div>
+		<div style="display:flex;align-items:center;gap:10px;">
+			<input class="nav-search" placeholder="Rechercher par nom, email" [(ngModel)]="filter" (input)="search()" />
+			<button class="btn ghost" (click)="clearFilter()">Effacer</button>
+			<button class="btn" (click)="loadAll()">Rafraîchir</button>
+		</div>
+	</div>
+
+	<div class="state" *ngIf="loading">Chargement...</div>
+	<div class="state error" *ngIf="!loading && error">{{ error }}</div>
+
+	<div class="table-wrap" *ngIf="!loading && !error && utilisateurs.length > 0">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nom</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Telephone</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let u of utilisateurs">
+					<td>{{ u.id }}</td>
+					<td>{{ u.nom ?? '-' }}</td>
+					<td>{{ u.email ?? '-' }}</td>
+					<td>{{ u.role ?? '-' }}</td>
+					<td><span class="badge">{{ u.telephone ?? '-' }}</span></td>
+					<td>
+						<button class="btn" (click)="viewDetails(u.id)">Voir</button>
+						<button class="btn danger" (click)="supprimer(u.id)">Supprimer</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="state empty" *ngIf="!loading && !error && utilisateurs.length === 0">Aucun utilisateur trouvé.</div>
+</div>
